@@ -7,16 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager_ConsoleApp_Terry.TodoManager
+namespace TaskManager_ConsoleApp_Terry
 {
-    public class TodoList
+    public class TodoManager
     {
         private List<TodoItem> TodoCollection;
         private int IdCouter = 0;
         
-        public void CreateTodo(string Title)
+        public void CreateTodo(string title)
         {
-            throw new NotImplementedException();
+
+            TodoItem Item = new TodoItem()
+            {
+                Id = IdCouter++,
+                Title = title,
+                CreatedDate = DateTimeOffset.Now,
+                DueAt = null,
+                LastModified = null,
+                DateCompleted = null, 
+                Status = Status.Open()
+            };
+            TodoCollection.Add(Item);
+
+            
 
         }
         public void BulkCreateTodo(string[] Titles)
