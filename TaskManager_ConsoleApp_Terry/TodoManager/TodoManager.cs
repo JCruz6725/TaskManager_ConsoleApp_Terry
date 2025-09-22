@@ -11,9 +11,11 @@ namespace TaskManager_ConsoleApp_Terry
 {
     public class TodoManager
     {
-        private List<TodoItem> TodoCollection;
+        private List<TodoItem> TodoCollection = [];
         private int IdCouter = 0;
-        
+
+
+
         public void CreateTodo(string title)
         {
 
@@ -27,6 +29,7 @@ namespace TaskManager_ConsoleApp_Terry
                 DateCompleted = null, 
                 Status = Status.Open()
             };
+
             TodoCollection.Add(Item);
 
             
@@ -35,7 +38,6 @@ namespace TaskManager_ConsoleApp_Terry
         public void BulkCreateTodo(string[] Titles)
         {
             throw new NotImplementedException();
-
         }
         public TodoItem DeleteTodo(int Id)
         {
@@ -54,8 +56,7 @@ namespace TaskManager_ConsoleApp_Terry
 
         public List<TodoItem> GetAllTodoItems() //[this.TodoCollection]
         {
-            throw new NotImplementedException();
-
+            return TodoCollection.ToList();
         }
 
         public TodoItem GetByld(int Id)

@@ -4,10 +4,18 @@
     {
         static void Main(string[] args)
         {
-            var App = new App();
+            App App = new App();
             App.Intialize();
-            App.Main();
-            App.Shutdown();
+            //App.Main();
+            //App.Shutdown();
         }
+
+
+
+
+
+
+
     }
+
 }
