@@ -18,11 +18,11 @@ namespace TaskManager_ConsoleApp_Terry
         public void Intialize()
         {
             Console.WriteLine($"Type '{Selection.Create}' to create a task");
-            Console.WriteLine("Type 'update' to update a task");
-            Console.WriteLine("Type 'delete' to delete a task");
-            Console.WriteLine("Type 'detail' to view detail of a task");
-            Console.WriteLine("Type 'edit' to edit a task");
-            Console.WriteLine("Type 'exit' to exit a application");
+            Console.WriteLine($"Type '{Selection.Update}' to update a task");
+            Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
+            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task");
+            Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
+            Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Press select your selection to get started");
             Console.WriteLine("-------------------------------------------");
@@ -68,6 +68,7 @@ namespace TaskManager_ConsoleApp_Terry
                         break;
 
                     case Selection.Exit:                               // figure out to have seperate screen from the main 
+                        Console.WriteLine();                           // Space 
                         Console.WriteLine("Have a Good Day");
                         run = false;
                         
@@ -75,7 +76,7 @@ namespace TaskManager_ConsoleApp_Terry
                         break;
                 }
 
-                if (run == true) { 
+                if (run) { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
                     taskViewer.MainMenu(TodoItems);
                 }
