@@ -54,10 +54,6 @@ namespace TaskManager_ConsoleApp_Terry
 
         }
 
-        public List<TodoItem> GetAllTodoItems() //[this.TodoCollection]
-        {
-            return TodoCollection.ToList();
-        }
 
         public TodoItem GetByld(int Id)
         {
@@ -69,7 +65,11 @@ namespace TaskManager_ConsoleApp_Terry
             throw new NotImplementedException();
 
         }
-
+     public List<TodoItem> GetAllTodoItems()    //[this.TodoCollection]
+        {
+            return TodoCollection.ToList();
+           
+        }
 
     }
 }
