@@ -16,7 +16,7 @@ namespace TaskManager_ConsoleApp_Terry
 
 
 
-        public void CreateTodo(string title)
+        public void CreateTodo(string title,DateTimeOffset? dueAt =null )
         {
 
             TodoItem Item = new TodoItem()
@@ -24,7 +24,7 @@ namespace TaskManager_ConsoleApp_Terry
                 Id = IdCouter++,
                 Title = title,
                 CreatedDate = DateTimeOffset.Now,
-                DueAt = null,
+                DueAt = dueAt,
                 LastModified = null,
                 DateCompleted = null, 
                 Status = Status.Open()

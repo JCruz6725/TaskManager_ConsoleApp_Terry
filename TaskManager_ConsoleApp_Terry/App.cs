@@ -1,8 +1,10 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager_ConsoleApp_Terry.Models;
@@ -15,100 +17,72 @@ namespace TaskManager_ConsoleApp_Terry
 
         public void Intialize()
         {
+            Console.WriteLine($"Type '{Selection.Create}' to create a task");
+            Console.WriteLine("Type 'update' to update a task");
+            Console.WriteLine("Type 'delete' to delete a task");
+            Console.WriteLine("Type 'detail' to view detail of a task");
+            Console.WriteLine("Type 'edit' to edit a task");
+            Console.WriteLine("Type 'exit' to exit a application");
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Press select your selection to get started");
+            Console.WriteLine("-------------------------------------------");
+            
+        }
+        public void Main()
+        {
             TodoManager todoManager = new TodoManager();
+            
             TaskViewer taskViewer = new TaskViewer();
 
 
 
+            bool run = true;
 
-            
-
-            for (int i = 0; i < 3 ; i++)
+            while (run)
             {
-
-
-
-                string? rawInput = Console.ReadLine();
-
-
-                if (rawInput == null)
-                    throw new Exception("aslkdja;lsdkj");
-
-
-                if (rawInput == "stop")
-                    break;
-
-
-                todoManager.CreateTodo(rawInput);
-            }
-
-
-            List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
-            taskViewer.MainMenu(TodoItems);
-        }
-        public void Main()
-        {
-            TodoManager todoManager = new();
-
-            while (true)
-            { 
-                todoManager.CreateTodo("go to work");
-
-
-                List<TodoItem> todoArray = todoManager.GetAllTodoItems();
-
-                foreach (var todoItem in todoArray)
+                string? commandInput = Console.ReadLine();
+                switch (commandInput)
                 {
-                    Console.WriteLine( todoItem.Title );
+                    case Selection.Create:
+
+                        Console.WriteLine("Enter Your Task At Hand:");
+                        string? rawInput = Console.ReadLine();
+                        Console.WriteLine("Enter your Due Date(mm / dd / yyyy or Enter to Skip:");
+                        string? dueDateInput = Console.ReadLine();
+
+                        DateTimeOffset? dueAt = null;
+
+                        if (!string.IsNullOrWhiteSpace(dueDateInput) && DateTimeOffset.TryParse(dueDateInput, out var parsedDate))
+                        {
+                            dueAt = parsedDate;
+                        }
+
+                        todoManager.CreateTodo(rawInput, dueAt);
+
+                        break;
+
+
+
+                        case Selection.Delete:                // When Selecting Delete 
+                        Console.WriteLine("Delete");          //Checker to ensure the selection works 
+                        break;
+
+                    case Selection.Exit:                               // figure out to have seperate screen from the main 
+                        Console.WriteLine("Have a Good Day");
+                        run = false;
+                        
+                        //test of case // formating is horrible
+                        break;
                 }
 
-
-
-
-
+                if (run == true) { 
+                    List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
+                    taskViewer.MainMenu(TodoItems);
+                }
 
             }
 
-
-            //while (true)
-            //{
-
-
-            //    Console.WriteLine("Welcome too your ToDo List");
-            //    Console.WriteLine("--------------------------");
-            //    Console.WriteLine("To Exit Program Enter:'Exit'");
-            //    Console.WriteLine("----------------------------");
-            //    Console.WriteLine("Enter Your Task Title:");
-            //    var TitleIn = Console.ReadLine();
-
-            //    if (TitleIn != "Exit")
-            //    {
-            //        Console.WriteLine("Enter your Due Date (mm/dd/yyyy or Enter to Skip):");
-            //        string DueDate = Console.ReadLine();
-
-            //        if (string.IsNullOrWhiteSpace(DueDate))
-            //        {
-            //            Console.WriteLine("Your Task :" + " " + TitleIn);
-            //        }
-            //        else
-            //        {
-            //            DateTime duedate = DateTime.Parse(DueDate);
-            //            Console.WriteLine(TitleIn + " " + duedate);  //
-            //        }
-
-            //    }
-            //    else if (TitleIn == "Exit")
-            //    {
-            //        break;
-            //    }
-
-            //}
-
-
         }
-        
-            
-        
         public void Shutdown()
         {
             Console.WriteLine();

@@ -13,11 +13,12 @@ namespace TaskManager_ConsoleApp_Terry.Models
         {
             return new Status("Open");
         }
-        public static Status Complete() {
+        public static Status Complete()
+        {
 
             return new("Complete");
         }
         private Status(string status) { Value = status; }
-        public string  Value { get; private set; }             // wasnt sure if int was appropiated to add 
+        public string Value { get; private set; }
     }
 }

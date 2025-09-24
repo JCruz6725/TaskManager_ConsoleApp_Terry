@@ -6,7 +6,7 @@
         {
             App App = new App();
             App.Intialize();
-            //App.Main();
+            App.Main();
             //App.Shutdown();
         }
 

@@ -13,7 +13,9 @@ namespace TaskManager_ConsoleApp_Terry.Render
     {
         public void DisplayShortItem(TodoItem todoitem)
         {
-            Console.WriteLine($"{todoitem.Id} {todoitem.Title}");
+            string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy"):"No due date";
+
+            Console.WriteLine($"ID:{todoitem.Id} Title: {todoitem.Title} (Due:{dueText})");
         }
         public void DisplayDetailedItem(TodoItem todoitem)
         {
@@ -28,6 +30,8 @@ namespace TaskManager_ConsoleApp_Terry.Render
         }
         public void MainMenu(List<TodoItem> todoitems)
         {
+
+
             string PreFix = """
                 Welcome too your ToDo List
                 --------------------------
