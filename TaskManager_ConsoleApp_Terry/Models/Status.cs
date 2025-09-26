@@ -15,7 +15,6 @@ namespace TaskManager_ConsoleApp_Terry.Models
         }
         public static Status Complete()
         {
-
             return new("Complete");
         }
         private Status(string status) { Value = status; }

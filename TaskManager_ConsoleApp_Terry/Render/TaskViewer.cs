@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace TaskManager_ConsoleApp_Terry.Render
 {
     public class TaskViewer
     {
+        
         public void DisplayShortItem(TodoItem todoitem)
         {
             string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy"):"No due date";
@@ -43,20 +46,23 @@ namespace TaskManager_ConsoleApp_Terry.Render
                 To Exit Program Enter:'Exit'
                 ----------------------------
                 """;
-            
-
-
-
+          
             Console.WriteLine(PreFix);
             DisplayAllItems(todoitems);
             Console.WriteLine(PostFix);
-
-
         }
 
         public void CreateEnterTitle()
         {
-
+            Console.WriteLine($"Type '{Selection.Create}' to create a task");
+            Console.WriteLine($"Type '{Selection.Update}' to update a task");
+            Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
+            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task");
+            Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
+            Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Press select your selection to get started");
+            Console.WriteLine("-------------------------------------------");
         }
         public void CreateEnterDueDate()
         {

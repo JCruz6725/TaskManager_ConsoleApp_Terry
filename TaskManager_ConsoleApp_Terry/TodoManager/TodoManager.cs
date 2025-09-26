@@ -14,8 +14,6 @@ namespace TaskManager_ConsoleApp_Terry
         private List<TodoItem> TodoCollection = [];
         private int IdCouter = 0;
 
-
-
         public void CreateTodo(string title,DateTimeOffset? dueAt =null )
         {
 
@@ -31,8 +29,6 @@ namespace TaskManager_ConsoleApp_Terry
             };
 
             TodoCollection.Add(Item);
-
-            
 
         }
         public void BulkCreateTodo(string[] Titles)

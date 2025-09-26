@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net.Sockets;
@@ -14,19 +15,12 @@ namespace TaskManager_ConsoleApp_Terry
 {
     public class App
     {
-
+        private TaskViewer taskViewer = new();         
         public void Intialize()
         {
-            Console.WriteLine($"Type '{Selection.Create}' to create a task");
-            Console.WriteLine($"Type '{Selection.Update}' to update a task");
-            Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
-            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task");
-            Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
-            Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
-            Console.WriteLine("-------------------------------------------");
-            Console.WriteLine("Press select your selection to get started");
-            Console.WriteLine("-------------------------------------------");
-            
+
+            taskViewer.CreateEnterTitle();
+
         }
         public void Main()
         {
@@ -44,7 +38,7 @@ namespace TaskManager_ConsoleApp_Terry
                 switch (commandInput)
                 {
                     case Selection.Create:
-
+                        Console.Clear();
                         Console.WriteLine("Enter Your Task At Hand:");
                         string? rawInput = Console.ReadLine();
                         Console.WriteLine("Enter your Due Date(mm / dd / yyyy or Enter to Skip:");
@@ -56,18 +50,17 @@ namespace TaskManager_ConsoleApp_Terry
                         {
                             dueAt = parsedDate;
                         }
-
+                        Console.Clear();
                         todoManager.CreateTodo(rawInput, dueAt);
 
                         break;
-
-
-
+                        
                         case Selection.Delete:                // When Selecting Delete 
                         Console.WriteLine("Delete");          //Checker to ensure the selection works 
                         break;
 
                     case Selection.Exit:                               // figure out to have seperate screen from the main 
+                        Console.Clear();
                         Console.WriteLine();                           // Space 
                         Console.WriteLine("Have a Good Day");
                         run = false;
@@ -87,7 +80,7 @@ namespace TaskManager_ConsoleApp_Terry
         public void Shutdown()
         {
             Console.WriteLine();
-            Console.WriteLine("C");
+            Console.WriteLine("SHUTDOWN");
         }
     }
 }
