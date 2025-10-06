@@ -44,12 +44,24 @@ namespace TaskManager_ConsoleApp_Terry
             throw new NotImplementedException();
 
         }
-        public void UpdateStatus(int Id,Status Status)
+        public void UpdateStatus(int Id,Status status)    // can i make this method a bool ? 
         {
-            throw new NotImplementedException();
+                                                                    // try linq method//Looks inside your in-memory TodoCollection (a list of all tasks).
+            var item= TodoCollection.FirstOrDefault(t => t.Id == Id);   // t represents each item in collection // checks for the ID to exit if not is null
+            if (item != null)                                         //IF  not  Equal to null "Excecute" 
+            {
+                item.Status = status;                              // assigning value of Instance Status --> status
+                item.LastModified = DateTimeOffset.Now;  // Current Date and Time 
 
+                if (status.Value == "Complete")           // When the user updates the task to Completed the following occurs
+                {
+                    //item.DateCompleted = DateTimeOffset.Now;   // Current Date and Time 
+                    Console.WriteLine("hello");                     // testing 
+                }
+                  // possible return true and than false 
+            }
         }
-
+       
 
         public TodoItem GetByld(int Id)
         {

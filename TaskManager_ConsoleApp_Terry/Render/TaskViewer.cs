@@ -13,12 +13,11 @@ namespace TaskManager_ConsoleApp_Terry.Render
 {
     public class TaskViewer
     {
-        
         public void DisplayShortItem(TodoItem todoitem)
         {
             string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy"):"No due date";
 
-            Console.WriteLine($"ID:{todoitem.Id} Title: {todoitem.Title} (Due:{dueText})");
+            Console.WriteLine($"ID:{todoitem.Id} Title: {todoitem.Title} Status: {todoitem.Status.Value}  (Due:{dueText})");   // Status: {todoitem.Status.Value} add after status is fully functional no errors 
         }
         public void DisplayDetailedItem(TodoItem todoitem)
         {
@@ -54,6 +53,7 @@ namespace TaskManager_ConsoleApp_Terry.Render
 
         public void CreateEnterTitle()
         {
+            
             Console.WriteLine($"Type '{Selection.Create}' to create a task");
             Console.WriteLine($"Type '{Selection.Update}' to update a task");
             Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
