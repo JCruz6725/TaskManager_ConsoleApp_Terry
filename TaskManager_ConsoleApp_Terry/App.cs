@@ -25,13 +25,12 @@ namespace TaskManager_ConsoleApp_Terry
         }
         public void Main()
         {
-            
-            
             bool run = true;
 
             while (run)
             {
                 string? commandInput = Console.ReadLine();
+
                 switch (commandInput)
                 {
                     case Selection.Create:
@@ -52,7 +51,7 @@ namespace TaskManager_ConsoleApp_Terry
 
                         break;
 
-                        case Selection.Update:
+                    case Selection.Update:
                         Console.Clear();                                     //Clears the console screen
                         Console.WriteLine("Enter the ID of the task to mark as completed:");
                         string? idInput = Console.ReadLine();              // String? --> can hold null as well!
@@ -81,19 +80,19 @@ namespace TaskManager_ConsoleApp_Terry
                         }
                         break;
 
-                        case Selection.Detail:   
+                    case Selection.Detail:   
                                               
                         break;  
                     
-                        case Selection.Delete:                
+                    case Selection.Delete:                
                         Console.WriteLine("Delete");          //Testing  
                         break;
 
-                        case Selection.Edit:
+                    case Selection.Edit:
                         Console.WriteLine("EDIT TESTING");
                         break;  
 
-                        case Selection.Exit:                              
+                    case Selection.Exit:                              
                         Console.Clear();                     
                         run = false;                                  // Allows an "Exit" without the List Showing
                         break;
