@@ -17,7 +17,7 @@ namespace TaskManager_ConsoleApp_Terry.Render
         {
             string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy"):"No due date";
 
-            Console.WriteLine($"ID:{todoitem.Id} Title: {todoitem.Title} Status: {todoitem.Status.Value}  (Due:{dueText})");   // Status: {todoitem.Status.Value} add after status is fully functional no errors 
+            Console.WriteLine($"ID: |{todoitem.Id}| Title: {todoitem.Title} Status: |{todoitem.Status.Value}| (Due:{dueText})");   // Due Date will be moved to detail page
         }
         public void DisplayDetailedItem(TodoItem todoitem)
         {
@@ -35,7 +35,7 @@ namespace TaskManager_ConsoleApp_Terry.Render
 
 
             string PreFix = """
-                Welcome too your ToDo List
+                Welcome to your ToDo List
                 --------------------------
                 """;
 

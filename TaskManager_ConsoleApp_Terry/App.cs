@@ -15,7 +15,8 @@ namespace TaskManager_ConsoleApp_Terry
 {
     public class App
     {
-        private TaskViewer taskViewer = new();         
+        private TaskViewer taskViewer = new (); 
+        private TodoManager todoManager = new();        
         public void Intialize()
         {
 
@@ -24,10 +25,8 @@ namespace TaskManager_ConsoleApp_Terry
         }
         public void Main()
         {
-            TodoManager todoManager = new TodoManager();
             
-            TaskViewer taskViewer = new TaskViewer();
-
+            
             bool run = true;
 
             while (run)
@@ -52,57 +51,62 @@ namespace TaskManager_ConsoleApp_Terry
                         todoManager.CreateTodo(rawInput, dueAt);
 
                         break;
-                        
-                        case Selection.Delete:                // When Selecting Delete 
-                        Console.WriteLine("Delete");          //Checker to ensure the selection works 
-                        break;
 
-                    case Selection.Detail:   // ----------------------->>>>>>>> Possible Enter of detail. 
-                                              
-                        break; 
-
-                    case Selection.Exit:                               // figure out to have seperate screen from the main 
-                        Console.Clear();
-                        Console.WriteLine();                           // Space 
-                        Console.WriteLine("Have a Good Day");
-                        run = false;
-                        break;//test of case // formating is horrible
-
-                    case Selection.Update:
+                        case Selection.Update:
                         Console.Clear();                                     //Clears the console screen
                         Console.WriteLine("Enter the ID of the task to mark as completed:");
                         string? idInput = Console.ReadLine();              // String? --> can hold null as well!
-                        Console.Clear();
-                        if (int.TryParse(idInput, out int idToUpdate))    // Converts a string (idInput) into an INT (idToUpdate)    // Dont like that doesnt check if Values of ID if they exist or not // future implemantions on modifiying this IF STATEMENT 
-                        {                                                   
-                            todoManager.UpdateStatus(idToUpdate,Status.Complete()); //Calls earlier method, updating that specific task’s status to "Complete".
-                        }                               // bool updated ??? 
-                        //if (idInput = ! ) ;             ---->>> figure out if ID is part current collection.!!!! 
+                        if (int.TryParse(idInput, out int idToUpdate))    // Converts a string (idInput) into an INT (idToUpdate)
+                        {
+                            bool updated = todoManager.UpdateStatus(idToUpdate, Status.Complete()); //Calls earlier method, updating that specific task’s status to "Complete".
+
+                            if (updated)
+                            {
+                                Console.WriteLine("Task Updated");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID Entered Not Found, Try Again");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                        }
                         else
                         {
-                            //Console.Clear();    ---->>> LIST STILL SHOWS  --->> another route 
-                            //run = false;                                          // Dont like the format of this line when update is invalid
-                            Console.WriteLine("Invalid ID Format!");
+                            Console.WriteLine("Invalid ID Format, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
                         }
                         break;
 
-                    case Selection.Edit:
-                        Console.WriteLine("EDIT TESTING ");
-                        break; 
+                        case Selection.Detail:   
+                                              
+                        break;  
+                    
+                        case Selection.Delete:                
+                        Console.WriteLine("Delete");          //Testing  
+                        break;
+
+                        case Selection.Edit:
+                        Console.WriteLine("EDIT TESTING");
+                        break;  
+
+                        case Selection.Exit:                              
+                        Console.Clear();                     
+                        run = false;                                  // Allows an "Exit" without the List Showing
+                        break;
                 }
-                //Console.Clear();
                 if (run) { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
                     taskViewer.MainMenu(TodoItems);
                 }
-                
             }
-
         }
         public void Shutdown()
         {
-            Console.WriteLine();
-            Console.WriteLine("SHUTDOWN");
+            Console.WriteLine("Exiting....");
         }
     }
 }

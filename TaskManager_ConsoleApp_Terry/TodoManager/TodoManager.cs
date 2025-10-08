@@ -44,36 +44,34 @@ namespace TaskManager_ConsoleApp_Terry
             throw new NotImplementedException();
 
         }
-        public void UpdateStatus(int Id,Status status)    // can i make this method a bool ? 
+        public bool UpdateStatus(int Id,Status status)    
         {
-                                                                    // try linq method//Looks inside your in-memory TodoCollection (a list of all tasks).
-            var item= TodoCollection.FirstOrDefault(t => t.Id == Id);   // t represents each item in collection // checks for the ID to exit if not is null
-            if (item != null)                                         //IF  not  Equal to null "Excecute" 
+            var item= TodoCollection.FirstOrDefault(t => t.Id == Id);   // t represents each item in collection // checks for the ID to exit if not is null  //Looks inside your in-memory TodoCollection (a list of all tasks).
+            if (item != null)                                          //IF  not  Equal to null "Excecute" 
             {
-                item.Status = status;                              // assigning value of Instance Status --> status
-                item.LastModified = DateTimeOffset.Now;  // Current Date and Time 
+                item.Status = status;                                   // assigning value of Instance Status --> status
+                item.LastModified = DateTimeOffset.Now; 
 
-                if (status.Value == "Complete")           // When the user updates the task to Completed the following occurs
+                if (status.Value == "Complete")                         // When the user updates the task to Completed the following occurs
                 {
-                    //item.DateCompleted = DateTimeOffset.Now;   // Current Date and Time 
-                    Console.WriteLine("hello");                     // testing 
+                    item.DateCompleted = DateTimeOffset.Now;   
                 }
-                  // possible return true and than false 
+                  return true;
             }
+           return false;
         }
-       
-
+      
         public TodoItem GetByld(int Id)
         {
             throw new NotImplementedException();
 
         }
-        public void EditItem (EditTodoItemInstruction edittodoiteminstruction) // is void needed ? 
+        public void EditItem (EditTodoItemInstruction edittodoiteminstruction) 
         {
             throw new NotImplementedException();
 
         }
-     public List<TodoItem> GetAllTodoItems()    //[this.TodoCollection]
+     public List<TodoItem> GetAllTodoItems()                                //[this.TodoCollection]
         {
             return TodoCollection.ToList();
            
