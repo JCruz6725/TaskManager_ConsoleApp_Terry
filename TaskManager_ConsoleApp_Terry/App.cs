@@ -15,7 +15,8 @@ namespace TaskManager_ConsoleApp_Terry
 {
     public class App
     {
-        private TaskViewer taskViewer = new();         
+        private TaskViewer taskViewer = new (); 
+        private TodoManager todoManager = new();        
         public void Intialize()
         {
 
@@ -24,17 +25,12 @@ namespace TaskManager_ConsoleApp_Terry
         }
         public void Main()
         {
-            TodoManager todoManager = new TodoManager();
-            
-            TaskViewer taskViewer = new TaskViewer();
-
-
-
             bool run = true;
 
             while (run)
             {
                 string? commandInput = Console.ReadLine();
+
                 switch (commandInput)
                 {
                     case Selection.Create:
@@ -54,33 +50,62 @@ namespace TaskManager_ConsoleApp_Terry
                         todoManager.CreateTodo(rawInput, dueAt);
 
                         break;
-                        
-                        case Selection.Delete:                // When Selecting Delete 
-                        Console.WriteLine("Delete");          //Checker to ensure the selection works 
+
+                    case Selection.Update:
+                        Console.Clear();                                     //Clears the console screen
+                        Console.WriteLine("Enter the ID of the task to mark as completed:");
+                        string? idInput = Console.ReadLine();              // String? --> can hold null as well!
+                        if (int.TryParse(idInput, out int idToUpdate))    // Converts a string (idInput) into an INT (idToUpdate)
+                        {
+                            bool updated = todoManager.UpdateStatus(idToUpdate, Status.Complete()); //Calls earlier method, updating that specific task’s status to "Complete".
+
+                            if (updated)
+                            {
+                                Console.WriteLine("Task Updated");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID Entered Not Found, Try Again");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid ID Format, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
                         break;
 
-                    case Selection.Exit:                               // figure out to have seperate screen from the main 
-                        Console.Clear();
-                        Console.WriteLine();                           // Space 
-                        Console.WriteLine("Have a Good Day");
-                        run = false;
-                        
-                        //test of case // formating is horrible
+                    case Selection.Detail:   
+                                              
+                        break;  
+                    
+                    case Selection.Delete:                
+                        Console.WriteLine("Delete");          //Testing  
+                        break;
+
+                    case Selection.Edit:
+                        Console.WriteLine("EDIT TESTING");
+                        break;  
+
+                    case Selection.Exit:                              
+                        Console.Clear();                     
+                        run = false;                                  // Allows an "Exit" without the List Showing
                         break;
                 }
-
                 if (run) { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
                     taskViewer.MainMenu(TodoItems);
                 }
-
             }
-
         }
         public void Shutdown()
         {
-            Console.WriteLine();
-            Console.WriteLine("SHUTDOWN");
+            Console.WriteLine("Exiting....");
         }
     }
 }
