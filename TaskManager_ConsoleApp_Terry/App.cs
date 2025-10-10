@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using TaskManager_ConsoleApp_Terry.Models;
 using TaskManager_ConsoleApp_Terry.Render;
 
@@ -57,10 +59,11 @@ namespace TaskManager_ConsoleApp_Terry
                         string? idInput = Console.ReadLine();              // String? --> can hold null as well!
                         if (int.TryParse(idInput, out int idToUpdate))    // Converts a string (idInput) into an INT (idToUpdate)
                         {
-                            bool updated = todoManager.UpdateStatus(idToUpdate, Status.Complete()); //Calls earlier method, updating that specific task’s status to "Complete".
-
-                            if (updated)
+                            if (todoManager.CheckDuplicte(idToUpdate))
                             {
+
+                                todoManager.UpdateStatus(idToUpdate, Status.Complete());      //Calls earlier method, updating that specific task’s status to "Complete".
+
                                 Console.WriteLine("Task Updated");
                                 Console.ReadLine();
                                 Console.Clear();
@@ -80,16 +83,41 @@ namespace TaskManager_ConsoleApp_Terry
                         }
                         break;
 
-                    case Selection.Detail:   
-                                              
+                    case Selection.Detail:
+                        Console.Clear();
+                        Console.WriteLine("Enter your ToDo ID. To View Detail");      
+                        string? idDetail= Console.ReadLine();
+                        if (int.TryParse(idDetail, out int viewDetail))
+                        {
+                            
+                            if (todoManager.CheckDuplicte(viewDetail))
+                            {
+                                TodoItem? detail = todoManager.GetByld(viewDetail);
+                                taskViewer.DisplayDetailedItem(detail);
+                                Console.ReadLine();
+                                Console.Clear(); 
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID Entered Not Found, Try Again");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid ID Format, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
                         break;  
                     
                     case Selection.Delete:                
-                        Console.WriteLine("Delete");          //Testing  
+                        Console.WriteLine("Delete");          //Test Case  
                         break;
 
                     case Selection.Edit:
-                        Console.WriteLine("EDIT TESTING");
+                        Console.WriteLine("EDIT TESTING");     //Test Case  
                         break;  
 
                     case Selection.Exit:                              
