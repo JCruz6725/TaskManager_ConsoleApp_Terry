@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.Design;
 
 namespace TaskManager_ConsoleApp_Terry
 {
@@ -44,26 +45,29 @@ namespace TaskManager_ConsoleApp_Terry
             throw new NotImplementedException();
 
         }
-        public bool UpdateStatus(int Id,Status status)    
+        public bool UpdateStatus(int Id, Status status)
         {
-            var item= TodoCollection.FirstOrDefault(t => t.Id == Id);   // t represents each item in collection // checks for the ID to exit if not is null  //Looks inside your in-memory TodoCollection (a list of all tasks).
-            if (item != null)                                          //IF  not  Equal to null "Excecute" 
+            if (!CheckDuplicte(Id))
             {
-                item.Status = status;                                   // assigning value of Instance Status --> status
-                item.LastModified = DateTimeOffset.Now; 
-
-                if (status.Value == "Complete")                         // When the user updates the task to Completed the following occurs
-                {
-                    item.DateCompleted = DateTimeOffset.Now;   
-                }
-                  return true;
+                return false;
             }
-           return false;
-        }
+            var item = GetByld(Id);   // t represents each item in collection // checks for the ID to exit if not is null  //Looks inside your in-memory TodoCollection (a list of all tasks).
+            item.Status = status;                                   // assigning value of Instance Status --> status
+            item.LastModified = DateTimeOffset.Now;
+
+            if (status.Value == "Complete")                         // When the user updates the task to Completed the following occurs
+                item.DateCompleted = DateTimeOffset.Now;
+            return true;
+            }
         
-        public TodoItem GetByld(int Id)
+        public bool CheckDuplicte (int Id) // checks if task with ID exists 
         {
-            throw new NotImplementedException();
+            return TodoCollection.Any(t => t.Id == Id);
+        }
+
+        public TodoItem? GetByld(int Id)       // pulls singler task by ID 
+        {
+           return TodoCollection.FirstOrDefault(t => t.Id == Id);
 
         }
         public void EditItem (EditTodoItemInstruction edittodoiteminstruction) 

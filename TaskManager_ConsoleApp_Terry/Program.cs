@@ -9,13 +9,6 @@
             App.Main();
             App.Shutdown();
         }
-
-
-
-
-
-
-
     }
 
 }

@@ -12,8 +12,8 @@ namespace TaskManager_ConsoleApp_Terry.Models
         public string Title { get; set; }
         public DateTimeOffset CreatedDate { get; init; } = DateTimeOffset.Now;
         public DateTimeOffset? DueAt { get; set; }
-        public DateTimeOffset? LastModified { get; set; }
-        public DateTimeOffset? DateCompleted { get; set; }
+        public DateTimeOffset? LastModified { get; set; } 
+        public DateTimeOffset? DateCompleted { get; set; } 
 
         public Status Status = Status.Open();  // possible corrections 
 
