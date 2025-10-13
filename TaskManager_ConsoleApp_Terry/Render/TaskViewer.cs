@@ -50,6 +50,8 @@ namespace TaskManager_ConsoleApp_Terry.Render
                 ---------------------------
                 To Exit Program Enter:'exit'
                 ----------------------------
+                Press 'Enter' to Return to Selections
+                ----------------------------
                 """;
           
             Console.WriteLine(PreFix);
@@ -67,6 +69,18 @@ namespace TaskManager_ConsoleApp_Terry.Render
             Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
             Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Press select your selection to get started");
+            Console.WriteLine("-------------------------------------------");
+        }
+        public void CreateTutorial()
+        {
+            Console.WriteLine($"Type '{Selection.Create}' to create a task");
+            Console.WriteLine($"Type '{Selection.Update}' to update a task");
+            Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
+            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task");
+            Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
+            Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Press 'Enter' , and type your selection:");
             Console.WriteLine("-------------------------------------------");
         }
         public void CreateEnterDueDate()
