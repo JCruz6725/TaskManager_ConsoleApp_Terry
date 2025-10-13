@@ -15,13 +15,21 @@ namespace TaskManager_ConsoleApp_Terry.Render
     {
         public void DisplayShortItem(TodoItem todoitem)
         {
-            string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy"):"No due date";
-
-            Console.WriteLine($"ID: |{todoitem.Id}| Title: {todoitem.Title} Status: |{todoitem.Status.Value}| (Due:{dueText})");   // Due Date will be moved to detail page
+            Console.WriteLine($"ID: |{todoitem.Id}| Title: {todoitem.Title} Status: |{todoitem.Status.Value}|)");
         }
         public void DisplayDetailedItem(TodoItem todoitem)
         {
+            string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy") : "No due date";
+            string lastModified = ("N/A");
 
+            Console.WriteLine($"ID: |{todoitem.Id}| Title: {todoitem.Title} , Status: |{todoitem.Status.Value}|)");
+
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine($"Created Date:{todoitem.CreatedDate}");
+            Console.WriteLine($"Task Completed Date:{todoitem.DateCompleted}");
+            Console.WriteLine($"Due Date: {dueText}");
+            Console.WriteLine($"Last Modified Date:{lastModified}");
+            Console.WriteLine("------------------------------------------------");
         }
         public void DisplayAllItems(List<TodoItem> todoitems)
         {
@@ -33,16 +41,14 @@ namespace TaskManager_ConsoleApp_Terry.Render
         public void MainMenu(List<TodoItem> todoitems)
         {
 
-
             string PreFix = """
                 Welcome to your ToDo List
                 --------------------------
                 """;
 
-
             string PostFix = """
                 ---------------------------
-                To Exit Program Enter:'Exit'
+                To Exit Program Enter:'exit'
                 ----------------------------
                 """;
           
@@ -53,7 +59,6 @@ namespace TaskManager_ConsoleApp_Terry.Render
 
         public void CreateEnterTitle()
         {
-            
             Console.WriteLine($"Type '{Selection.Create}' to create a task");
             Console.WriteLine($"Type '{Selection.Update}' to update a task");
             Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
