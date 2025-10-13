@@ -125,12 +125,6 @@ namespace TaskManager_ConsoleApp_Terry
                         run = false;                                  // Allows an "Exit" without the List Showing
                         break;
 
-                    default:
-                        Console.Clear();
-                        taskViewer.CreateTutorial();
-                        Console.ReadLine();
-                        Console.Clear();
-                        break;
                 }
                 if (run) { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
