@@ -112,8 +112,45 @@ namespace TaskManager_ConsoleApp_Terry
                         }
                         break;  
                     
-                    case Selection.Delete:                
-                        Console.WriteLine("Delete");          //Test Case  
+                    case Selection.Delete:
+                        Console.Clear();
+                        Console.WriteLine("Enter Your ToDO ID # : To Delete");
+                        string? rawDelete = Console.ReadLine();
+                        Console.WriteLine("Are you sure you want to delete this task? [yes / no]");
+                        string? inputDelete = Console.ReadLine();
+                        if (int.TryParse(rawDelete, out int viewDelete))
+                        {
+                            if (todoManager.CheckDuplicte(viewDelete))
+                            {
+                                if (inputDelete == "yes")
+                                {
+                                    int result = Int32.Parse(rawDelete);
+                                    todoManager.DeleteTodo(result);
+                                    Console.WriteLine($"Task ({rawDelete}),has been deleted");
+                                    Console.ReadLine();
+                                    Console.Clear();
+                                }
+
+                                else if (inputDelete == "no")
+                                {
+                                    Console.WriteLine("No Task Deleted");
+                                    continue;
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID Entered Not Found, Try Again");
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid ID Format, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
                         break;
 
                     case Selection.Edit:
