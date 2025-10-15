@@ -162,6 +162,20 @@ namespace TaskManager_ConsoleApp_Terry
                         run = false;                                  // Allows an "Exit" without the List Showing
                         break;
 
+                    case Selection.Help:
+                        Console.Clear(); 
+                        taskViewer.CreateTutorial();
+                        Console.ReadLine();
+                        Console.Clear(); 
+                        break; 
+
+                    default:
+                        Console.WriteLine("Please Enter a Selection");
+                        Console.WriteLine("------------------------");
+                        Console.WriteLine("Enter 'help' to see possible selections");
+                        Console.ReadLine();
+                        Console.Clear(); 
+                        break; 
                 }
                 if (run) { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
