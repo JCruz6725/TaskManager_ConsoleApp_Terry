@@ -57,64 +57,86 @@ namespace TaskManager_ConsoleApp_Terry
                         Console.Clear();                                     //Clears the console screen
                         Console.WriteLine("Enter the ID of the task to mark as completed:");
                         string? idInput = Console.ReadLine();              // String? --> can hold null as well!
-                        if (int.TryParse(idInput, out int idToUpdate))    // Converts a string (idInput) into an INT (idToUpdate)
-                        {
-                            if (todoManager.CheckDuplicte(idToUpdate))
-                            {
 
-                                todoManager.UpdateStatus(idToUpdate, Status.Complete());      //Calls earlier method, updating that specific task’s status to "Complete".
-
-                                Console.WriteLine("Task Updated");
-                                Console.ReadLine();
-                                Console.Clear();
-                            }
-                            else
-                            {
-                                Console.WriteLine("ID Entered Not Found, Try Again");
-                                Console.ReadLine();
-                                Console.Clear();
-                            }
-                        }
-                        else
+                        if (!int.TryParse(idInput, out int idToUpdate)) 
                         {
                             Console.WriteLine("Invalid ID Format, Try Again");
                             Console.ReadLine();
                             Console.Clear();
+                            break; 
                         }
-                        break;
+                        if (!todoManager.CheckDuplicte(idToUpdate))
+                        {
+                            Console.WriteLine("ID Entered Not Found, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+                        todoManager.UpdateStatus(idToUpdate, Status.Complete());
+                        Console.WriteLine("Task Updated");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break; 
 
                     case Selection.Detail:
                         Console.Clear();
                         Console.WriteLine("Enter your ToDo ID. To View Detail");      
                         string? idDetail= Console.ReadLine();
-                        if (int.TryParse(idDetail, out int viewDetail))
-                        {
-                            
-                            if (todoManager.CheckDuplicte(viewDetail))
-                            {
-                                TodoItem? detail = todoManager.GetByld(viewDetail);
-                                taskViewer.DisplayDetailedItem(detail);
-                                Console.ReadLine();
-                                Console.Clear(); 
-                            }
-                            else
-                            {
-                                Console.WriteLine("ID Entered Not Found, Try Again");
-                                Console.ReadLine();
-                                Console.Clear();
-                            }
-                        }
-                        else
+
+                        if (!int.TryParse(idDetail, out int viewDetail))
                         {
                             Console.WriteLine("Invalid ID Format, Try Again");
                             Console.ReadLine();
                             Console.Clear();
+                            break;
                         }
-                        break;  
-                    
-                    case Selection.Delete:                
-                        Console.WriteLine("Delete");          //Test Case  
+                        if (!todoManager.CheckDuplicte(viewDetail))
+                        {
+                            Console.WriteLine("ID Entered Not Found, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+                             TodoItem? detail = todoManager.GetByld(viewDetail);
+                             taskViewer.DisplayDetailedItem(detail);
+                             Console.ReadLine();
+                             Console.Clear();
                         break;
+
+                    case Selection.Delete:
+                        Console.Clear();
+                        Console.WriteLine("Enter Your ToDO ID # : To Delete");
+                        string? rawDelete = Console.ReadLine();
+                         if (!int.TryParse(rawDelete, out int viewDelete))
+                        {
+                            Console.WriteLine("Invalid ID Format, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+                        if (!todoManager.CheckDuplicte(viewDelete))
+                        {
+                            Console.WriteLine("ID Entered Not Found, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+
+                        Console.WriteLine("Are you sure you want to delete this task? [yes / no]");
+                        string? inputDelete = Console.ReadLine();
+                   
+                        if (inputDelete == "no")
+                        {
+                            Console.WriteLine("No Task Deleted");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+                        todoManager.DeleteTodo(viewDelete);
+                        Console.WriteLine($"Task ({rawDelete}),has been deleted");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break; 
 
                     case Selection.Edit:
                         Console.WriteLine("EDIT TESTING");     //Test Case  
@@ -125,6 +147,20 @@ namespace TaskManager_ConsoleApp_Terry
                         run = false;                                  // Allows an "Exit" without the List Showing
                         break;
 
+                    case Selection.Help:
+                        Console.Clear();
+                        taskViewer.CreateEnterTitle(true);
+                        Console.ReadLine();
+                        Console.Clear(); 
+                        break; 
+
+                    default:
+                        Console.WriteLine("Please Enter a valid Selection");
+                        Console.WriteLine("------------------------");
+                        Console.WriteLine("Enter 'help' to see possible selections");
+                        Console.ReadLine();
+                        Console.Clear(); 
+                        break; 
                 }
                 if (run) { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();

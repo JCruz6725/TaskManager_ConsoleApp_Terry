@@ -38,7 +38,15 @@ namespace TaskManager_ConsoleApp_Terry
         }
         public TodoItem DeleteTodo(int Id)
         {
-            throw new NotImplementedException();
+            foreach (var rawdelete in TodoCollection.ToList())
+            {
+                if (rawdelete.Id == Id)
+                {
+                    TodoCollection.Remove(rawdelete);
+                    return rawdelete;
+                }
+            }
+            return null; 
         }
             public TodoItem? TryDeleteTodo(int Id)
         {
