@@ -124,8 +124,7 @@ namespace TaskManager_ConsoleApp_Terry
                             {
                                 if (inputDelete == "yes")
                                 {
-                                    int result = Int32.Parse(rawDelete);
-                                    todoManager.DeleteTodo(result);
+                                    todoManager.DeleteTodo(viewDelete);
                                     Console.WriteLine($"Task ({rawDelete}),has been deleted");
                                     Console.ReadLine();
                                     Console.Clear();
@@ -163,14 +162,14 @@ namespace TaskManager_ConsoleApp_Terry
                         break;
 
                     case Selection.Help:
-                        Console.Clear(); 
-                        taskViewer.CreateTutorial();
+                        Console.Clear();
+                        taskViewer.CreateEnterTitle(true);
                         Console.ReadLine();
                         Console.Clear(); 
                         break; 
 
                     default:
-                        Console.WriteLine("Please Enter a Selection");
+                        Console.WriteLine("Please Enter a valid Selection");
                         Console.WriteLine("------------------------");
                         Console.WriteLine("Enter 'help' to see possible selections");
                         Console.ReadLine();

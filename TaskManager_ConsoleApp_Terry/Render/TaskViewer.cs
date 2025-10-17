@@ -57,7 +57,7 @@ namespace TaskManager_ConsoleApp_Terry.Render
             Console.WriteLine(PostFix);
         }
 
-        public void CreateEnterTitle()
+        public void CreateEnterTitle(bool tutorial = false)
         {
             Console.WriteLine($"Type '{Selection.Create}' to create a task");
             Console.WriteLine($"Type '{Selection.Update}' to update a task");
@@ -66,21 +66,12 @@ namespace TaskManager_ConsoleApp_Terry.Render
             Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
             Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
             Console.WriteLine("-------------------------------------------");
-            Console.WriteLine("Enter your choice to proceed");
+          if (tutorial)
+                Console.WriteLine("Press Enter to return and Enter your choice");
+          else
+                Console.WriteLine("Enter your choice to proceed");
             Console.WriteLine("-------------------------------------------");
-        }
-        public void CreateTutorial()
-        {
-            Console.WriteLine($"Type '{Selection.Create}' to create a task");
-            Console.WriteLine($"Type '{Selection.Update}' to update a task");
-            Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
-            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task");
-            Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
-            Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
-            Console.WriteLine("-------------------------------------------");
-            Console.WriteLine("Press Enter to return and Enter your choice");
-            Console.WriteLine("-------------------------------------------");
-        }
+        } 
         public void ConfirmDeletion()
         {
 

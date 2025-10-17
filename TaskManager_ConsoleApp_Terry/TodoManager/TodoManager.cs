@@ -48,7 +48,6 @@ namespace TaskManager_ConsoleApp_Terry
             }
             return null; 
         }
-        
             public TodoItem? TryDeleteTodo(int Id)
         {
             throw new NotImplementedException();
