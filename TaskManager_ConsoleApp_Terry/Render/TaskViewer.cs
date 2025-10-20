@@ -20,7 +20,7 @@ namespace TaskManager_ConsoleApp_Terry.Render
         public void DisplayDetailedItem(TodoItem todoitem)
         {
             string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy") : "No due date";
-            string lastModified = ("N/A");
+            string lastModified = "N/A";
 
             Console.WriteLine($"ID: |{todoitem.Id}| Title: {todoitem.Title} , Status: |{todoitem.Status.Value}|)");
 
@@ -69,10 +69,17 @@ namespace TaskManager_ConsoleApp_Terry.Render
             Console.WriteLine("Press select your selection to get started");
             Console.WriteLine("-------------------------------------------");
         }
-        public void CreateEnterDueDate()
+        public void EditOptions()
         {
+            Console.WriteLine("Select an option");
+            Console.WriteLine($"Type '{EditSelection.Name}' to edit a task title");
+            Console.WriteLine($"Type '{EditSelection.DueDate}' to edit a task due date");
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine($"Enter '{EditSelection.Return}' to return to the main menu");
+            Console.WriteLine("-------------------------------------------");
 
         }
+          
         public void ConfirmDeletion()
         {
 

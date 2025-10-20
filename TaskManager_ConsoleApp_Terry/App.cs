@@ -87,31 +87,53 @@ namespace TaskManager_ConsoleApp_Terry
                         Console.Clear();
                         Console.WriteLine("Enter your ToDo ID. To View Detail");      
                         string? idDetail= Console.ReadLine();
-                        if (int.TryParse(idDetail, out int viewDetail))
-                        {
-                            
-                            if (todoManager.CheckDuplicte(viewDetail))
-                            {
-                                TodoItem? detail = todoManager.GetByld(viewDetail);
-                                taskViewer.DisplayDetailedItem(detail);
-                                Console.ReadLine();
-                                Console.Clear(); 
-                            }
-                            else
-                            {
-                                Console.WriteLine("ID Entered Not Found, Try Again");
-                                Console.ReadLine();
-                                Console.Clear();
-                            }
-                        }
-                        else
+                        if (!int.TryParse(idDetail, out int viewDetail))
                         {
                             Console.WriteLine("Invalid ID Format, Try Again");
                             Console.ReadLine();
                             Console.Clear();
+                            break;
                         }
-                        break;  
-                    
+                        if (!todoManager.CheckDuplicte(viewDetail))
+                        {
+                            Console.WriteLine("ID Entered Not Found, Try Again");
+                            Console.ReadLine();
+                            Console.Clear();
+                            break;
+                        }
+                        TodoItem? detail = todoManager.GetByld(viewDetail);
+                        taskViewer.DisplayDetailedItem(detail);
+                        //Console.ReadLine();
+                        //Console.Clear();
+
+                        taskViewer.EditOptions();
+                        string? EditOptions = Console.ReadLine();
+                        switch (EditOptions)
+                        {
+                             case EditSelection.Name:
+                                Console.WriteLine("What is the new title?");
+                                string newTitle = Console.ReadLine();
+                                todoManager.EditName(newTitle , viewDetail);
+                                Console.Clear();
+                                break; 
+                            
+                            
+                            case EditSelection.DueDate:
+                                Console.WriteLine("What is your new due date?");
+                                Console.WriteLine("Enter your Due Date(mm / dd / yyyy or Enter to Skip:");
+                                string? duedate = Console.ReadLine();
+                                todoManager.EditDuedate(duedate , viewDetail);
+                             
+                                break;
+
+                           case EditSelection.Return:
+                                Console.ReadLine();
+                                Console.Clear();
+                                break;
+                        }
+
+                        break;
+
                     case Selection.Delete:                
                         Console.WriteLine("Delete");          //Test Case  
                         break;

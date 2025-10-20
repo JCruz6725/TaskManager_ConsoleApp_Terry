@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.Design;
+using Microsoft.VisualBasic;
 
 namespace TaskManager_ConsoleApp_Terry
 {
@@ -75,6 +76,32 @@ namespace TaskManager_ConsoleApp_Terry
             throw new NotImplementedException();
 
         }
+
+        public void EditName(string newTitle , int Id)
+        {
+            TodoItem item = GetByld(Id);
+
+            if (!string.IsNullOrWhiteSpace(newTitle))
+
+                item.Title = newTitle;
+                 
+        }
+
+        public void EditStatus()
+        {
+
+        }
+        public void EditDuedate(string newDuedate , int Id)
+        {
+            TodoItem item = GetByld(Id);
+
+            if (!string.IsNullOrWhiteSpace(newDuedate) && DateTimeOffset.TryParse(newDuedate, out var parsedDate))
+
+            item.DueAt = parsedDate;
+
+            item.LastModified = DateTimeOffset.Now;
+        }
+
      public List<TodoItem> GetAllTodoItems()                                //[this.TodoCollection]
         {
             return TodoCollection.ToList();
