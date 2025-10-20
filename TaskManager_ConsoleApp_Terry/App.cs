@@ -65,7 +65,7 @@ namespace TaskManager_ConsoleApp_Terry
                             Console.Clear();
                             break; 
                         }
-                        if (!todoManager.CheckDuplicte(idToUpdate))
+                        if (!todoManager.CheckForID(idToUpdate))
                         {
                             Console.WriteLine("ID Entered Not Found, Try Again");
                             Console.ReadLine();
@@ -90,7 +90,7 @@ namespace TaskManager_ConsoleApp_Terry
                             Console.Clear();
                             break;
                         }
-                        if (!todoManager.CheckDuplicte(viewDetail))
+                        if (!todoManager.CheckForID(viewDetail))
                         {
                             Console.WriteLine("ID Entered Not Found, Try Again");
                             Console.ReadLine();
@@ -114,7 +114,7 @@ namespace TaskManager_ConsoleApp_Terry
                             Console.Clear();
                             break;
                         }
-                        if (!todoManager.CheckDuplicte(viewDelete))
+                        if (!todoManager.CheckForID(viewDelete))
                         {
                             Console.WriteLine("ID Entered Not Found, Try Again");
                             Console.ReadLine();
@@ -132,11 +132,20 @@ namespace TaskManager_ConsoleApp_Terry
                             Console.Clear();
                             break;
                         }
-                        todoManager.DeleteTodo(viewDelete);
-                        Console.WriteLine($"Task ({rawDelete}),has been deleted");
+
+                        var deletedItem= todoManager.TryDeleteTodo(viewDelete);
+                        if (deletedItem == null)
+                        {
+                            Console.WriteLine($"Task ({rawDelete}),was not found , no task was deleted");
+                        }
+                        else
+                        {
+                            todoManager.TryDeleteTodo(viewDelete);
+                            Console.WriteLine($"Task ({rawDelete}),has been deleted");
+                        }
                         Console.ReadLine();
                         Console.Clear();
-                        break; 
+                        break;
 
                     case Selection.Edit:
                         Console.WriteLine("EDIT TESTING");     //Test Case  

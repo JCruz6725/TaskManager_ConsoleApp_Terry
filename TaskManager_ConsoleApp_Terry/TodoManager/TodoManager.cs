@@ -36,7 +36,7 @@ namespace TaskManager_ConsoleApp_Terry
         {
             throw new NotImplementedException();
         }
-        public TodoItem DeleteTodo(int Id)
+        public TodoItem? TryDeleteTodo(int Id)
         {
             foreach (var rawdelete in TodoCollection.ToList())
             {
@@ -48,14 +48,14 @@ namespace TaskManager_ConsoleApp_Terry
             }
             return null; 
         }
-            public TodoItem? TryDeleteTodo(int Id)
+            public TodoItem? DeleteTodo(int Id)
         {
             throw new NotImplementedException();
 
         }
         public bool UpdateStatus(int Id, Status status)
         {
-            if (!CheckDuplicte(Id))
+            if (!CheckForID(Id))
             {
                 return false;
             }
@@ -68,7 +68,7 @@ namespace TaskManager_ConsoleApp_Terry
             return true;
             }
         
-        public bool CheckDuplicte (int Id) // checks if task with ID exists 
+        public bool CheckForID (int Id) // checks if task with ID exists 
         {
             return TodoCollection.Any(t => t.Id == Id);
         }
