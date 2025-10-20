@@ -20,7 +20,7 @@ namespace TaskManager_ConsoleApp_Terry.Render
         public void DisplayDetailedItem(TodoItem todoitem)
         {
             string dueText = todoitem.DueAt.HasValue ? todoitem.DueAt.Value.ToString("MM/dd/yyyy") : "No due date";
-            string lastModified = ("N/A");
+            string lastModified = "N/A";
 
             Console.WriteLine($"ID: |{todoitem.Id}| Title: {todoitem.Title} , Status: |{todoitem.Status.Value}|)");
 
