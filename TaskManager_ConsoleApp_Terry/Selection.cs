@@ -13,7 +13,6 @@ namespace TaskManager_ConsoleApp_Terry
         public const string Update = "update";
         public const string Delete = "delete";
         public const string Detail = "detail";
-        public const string Edit = "edit";
         public const string Exit = "exit";
         public const string Help = "help";
     }

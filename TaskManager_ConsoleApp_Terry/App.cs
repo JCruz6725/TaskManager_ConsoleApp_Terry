@@ -21,14 +21,12 @@ namespace TaskManager_ConsoleApp_Terry
         private TodoManager todoManager = new();        
         public void Intialize()
         {
-            /// Test Environment 
+            /// Test Environment. 
             //todoManager.CreateTodo(new TodoItem() { Id = 0, Title = "Go to the store"});
             //todoManager.CreateTodo(new TodoItem() { Id = 1, Title = "Go to the concert." });
-            //todoManager.CreateTodo(new TodoItem() { Id = 1, Title = "Go to the park." });
-
+            //todoManager.CreateTodo(new TodoItem() { Id = 1, Title = "Go to the park." };
+           
             taskViewer.CreateEnterTitle();
-
-
         }
         public void Main()
         {
@@ -120,11 +118,41 @@ namespace TaskManager_ConsoleApp_Terry
                             Console.Clear();
                             break;
                         }
-                        TodoItem? detail = todoManager.GetByld(viewDetail);
 
+                        TodoItem? detail = todoManager.GetByld(viewDetail);
+                        
                         taskViewer.DisplayDetailedItem(detail);
+                        Console.WriteLine("Press Enter To Continue .....");
                         Console.ReadLine();
                         Console.Clear();
+
+                        taskViewer.EditOptions();                         /// Edit Switch Statement within Detail 
+                        string? EditOptions = Console.ReadLine();
+                        switch (EditOptions)
+                        {
+                            case EditSelection.Name:
+                                Console.WriteLine("-------------------------------------------");
+                                Console.WriteLine("What is the new title?");
+                                string? newTitle = Console.ReadLine();
+                                todoManager.EditName(newTitle, viewDetail);
+                                Console.Clear();
+                                break;
+
+
+                            case EditSelection.DueDate:
+                                Console.WriteLine("-------------------------------------------");
+                                Console.WriteLine("What is your new due date?");
+                                Console.WriteLine("Enter your Due Date(mm / dd / yyyy or Enter to Skip:");
+                                string? duedate = Console.ReadLine();
+                                todoManager.EditDuedate(duedate, viewDetail);
+
+                                break;
+
+                            case EditSelection.Return:
+                                Console.ReadLine();
+                                Console.Clear();
+                                break;
+                        }
                         break;
 
                     case Selection.Delete:
@@ -159,14 +187,13 @@ namespace TaskManager_ConsoleApp_Terry
                         Console.WriteLine("Are you sure you want to delete this task? [yes / no]");
                         string? inputDelete = Console.ReadLine();
                    
-                        if (inputDelete == "no")
-                        {
-                            Console.WriteLine("No Task Deleted");
+                        if (inputDelete == "no") { 
+                            Console.WriteLine("No Task was deleted");
                             Console.ReadLine();
                             Console.Clear();
                             break;
                         }
-
+                     
                         TodoItem? deletedItem = todoManager.TryDeleteTodo(viewDelete);
                         if (deletedItem == null)
                         {
@@ -181,10 +208,6 @@ namespace TaskManager_ConsoleApp_Terry
                         Console.Clear();
                         break;
 
-                    case Selection.Edit:
-                        Console.WriteLine("EDIT TESTING");     //Test Case  
-                        break;  
-
                     case Selection.Exit:                              
                         Console.Clear();                     
                         run = false;                                  // Allows an "Exit" without the List Showing
@@ -198,14 +221,16 @@ namespace TaskManager_ConsoleApp_Terry
                         break; 
 
                     default:
-                        Console.WriteLine("Please Enter a valid Selection");
-                        Console.WriteLine("------------------------");
+                        Console.WriteLine("Please Enter a Valid Selection");
+                        Console.WriteLine("---------------------------------------");
                         Console.WriteLine("Enter 'help' to see possible selections");
+                        Console.WriteLine("---------------------------------------");
                         Console.ReadLine();
                         Console.Clear(); 
                         break; 
                 }
-                if (run) { 
+                if (run)
+                { 
                     List<TodoItem> TodoItems = todoManager.GetAllTodoItems();
                     taskViewer.MainMenu(TodoItems);
                 }

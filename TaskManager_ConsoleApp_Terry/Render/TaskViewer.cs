@@ -62,27 +62,27 @@ namespace TaskManager_ConsoleApp_Terry.Render
             Console.WriteLine($"Type '{Selection.Create}' to create a task");
             Console.WriteLine($"Type '{Selection.Update}' to update a task");
             Console.WriteLine($"Type '{Selection.Delete}' to delete a task");
-            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task");
-            Console.WriteLine($"Type '{Selection.Edit}' to edit a task");
+            Console.WriteLine($"Type '{Selection.Detail}' to view detail of a task and edit");
             Console.WriteLine($"Type '{Selection.Exit}' to exit a application");
             Console.WriteLine("-------------------------------------------");
           if (tutorial)
                 Console.WriteLine("Press Enter to return and Enter your choice");
+
           else
                 Console.WriteLine("Enter your choice to proceed");
+                Console.WriteLine("-------------------------------------------");
+        }
+        public void EditOptions()
+        {
+            Console.WriteLine("Select an option , to edit a task" +
+                "");
             Console.WriteLine("-------------------------------------------");
-        } 
-        public void ConfirmDeletion()
-        {
+            Console.WriteLine($"Type '{EditSelection.Name}' to edit a task title");
+            Console.WriteLine($"Type '{EditSelection.DueDate}' to edit a task due date");
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine($"Enter '{EditSelection.Return}' to return to the main menu");
+            Console.WriteLine("-------------------------------------------");
 
-        }
-        public void SomeActionCompleted(string action)
-        {
-
-        }
-        public void SelectTaskByld(string action)
-        {
-
-        }
+        }   
     }
 }
