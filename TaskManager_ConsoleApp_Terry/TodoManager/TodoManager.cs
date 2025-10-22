@@ -31,20 +31,12 @@ namespace TaskManager_ConsoleApp_Terry
             };
 
             TodoCollection.Add(Item);
-
         }
-
         /// Test Environment 
         //public void CreateTodo(TodoItem t)
         //{
         //    TodoCollection.Add(t);
         //}
-
-
-        public void BulkCreateTodo(string[] Titles)
-        {
-            throw new NotImplementedException();
-        }
         public TodoItem? TryDeleteTodo(int Id)
         {
             foreach (var rawdelete in TodoCollection.ToList())
@@ -56,11 +48,6 @@ namespace TaskManager_ConsoleApp_Terry
                 }
             }
             return null; 
-        }
-            public TodoItem? DeleteTodo(int Id)
-        {
-            throw new NotImplementedException();
-
         }
         public bool UpdateStatus(int Id, Status status)
         {
@@ -91,7 +78,6 @@ namespace TaskManager_ConsoleApp_Terry
             }
             return false;
         }
-
         public bool ContainsDuplicates(int id) {
             Dictionary<int, int> idsWithCounts = new Dictionary<int, int>();
 
@@ -113,25 +99,13 @@ namespace TaskManager_ConsoleApp_Terry
            return TodoCollection.FirstOrDefault(t => t.Id == Id);
 
         }
-        public void EditItem (EditTodoItemInstruction edittodoiteminstruction) 
-        {
-            throw new NotImplementedException();
-
-        }
-
         public void EditName(string newTitle , int Id)
         {
             TodoItem item = GetByld(Id);
 
             if (!string.IsNullOrWhiteSpace(newTitle))
 
-                item.Title = newTitle;
-                 
-        }
-
-        public void EditStatus()
-        {
-
+                item.Title = newTitle;    
         }
         public void EditDuedate(string newDuedate , int Id)
         {
@@ -143,14 +117,11 @@ namespace TaskManager_ConsoleApp_Terry
 
             item.LastModified = DateTimeOffset.Now;
         }
-
-     public List<TodoItem> GetAllTodoItems()                                //[this.TodoCollection]
+         public List<TodoItem> GetAllTodoItems()                                //[this.TodoCollection]
         {
             return TodoCollection.ToList();
            
         }
-
-       
     }
 }
 
