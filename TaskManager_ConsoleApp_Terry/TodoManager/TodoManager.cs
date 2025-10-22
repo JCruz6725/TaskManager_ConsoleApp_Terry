@@ -104,18 +104,23 @@ namespace TaskManager_ConsoleApp_Terry
             TodoItem item = GetByld(Id);
 
             if (!string.IsNullOrWhiteSpace(newTitle))
+            {
 
-                item.Title = newTitle;    
+                item.Title = newTitle;
+            }
         }
         public void EditDuedate(string newDuedate , int Id)
         {
             TodoItem item = GetByld(Id);
 
             if (!string.IsNullOrWhiteSpace(newDuedate) && DateTimeOffset.TryParse(newDuedate, out var parsedDate))
+            {
 
-            item.DueAt = parsedDate;
+                item.DueAt = parsedDate;
+            }
 
             item.LastModified = DateTimeOffset.Now;
+
         }
          public List<TodoItem> GetAllTodoItems()                                //[this.TodoCollection]
         {
